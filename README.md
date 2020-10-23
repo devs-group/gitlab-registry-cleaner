@@ -10,9 +10,9 @@ Gitlab Registry Cleaner is a tiny container which can be used to remove images f
 ```sh
 docker run \
  && -e ACCESS_TOKEN='<your_gitlab_access_token>' \
- && -e PROJECT_ID='$CI_PROJECT_ID' \
- && -e IMAGE_TAG='$CI_BUILD_REF_NAME' \
- && -e IMAGE_LOCATION='$GITLAB_REGISTRY/$CI_PROJECT_PATH/<your_path>' \
+ && -e PROJECT_ID=$CI_PROJECT_ID \
+ && -e IMAGE_TAG=$CI_BUILD_REF_NAME \
+ && -e IMAGE_LOCATION=$GITLAB_REGISTRY/$CI_PROJECT_PATH/<your_path> \
  && devsgroup/gitlab-registry-cleaner:latest
 ```
 
@@ -23,10 +23,10 @@ delete_frontend_image:
   script:
     - |
       docker run \
-        -e ACCESS_TOKEN='$GITLAB_ACCESS_TOKEN' \
-        -e PROJECT_ID='$CI_PROJECT_ID' \
-        -e IMAGE_TAG='$CI_BUILD_REF_NAME' \
-        -e IMAGE_LOCATION='$GITLAB_REGISTRY/$CI_PROJECT_PATH/web_frontend' \
+        -e ACCESS_TOKEN=$GITLAB_ACCESS_TOKEN \
+        -e PROJECT_ID=$CI_PROJECT_ID \
+        -e IMAGE_TAG=$CI_BUILD_REF_NAME \
+        -e IMAGE_LOCATION=$GITLAB_REGISTRY/$CI_PROJECT_PATH/web_frontend \
         devsgroup/gitlab-registry-cleaner:latest
   only:
     - branches
